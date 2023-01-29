@@ -27,10 +27,16 @@
     padding: 15px;
 }
 
-.home-container .join-button {
+.join-button {
     background-color: var(--second-bg-color);
     color: var(--main-bg-font-color);
     font-weight: 600;
     padding: 8px 25px;
     border-radius: 5px;
+}
+
+.join-button:hover {
+    color: var(--second-bg-color);
+    background-color: var(--main-bg-font-color);
+    border: 1px solid var(--second-bg-color);
 }

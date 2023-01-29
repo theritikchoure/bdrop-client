@@ -14,3 +14,17 @@
     font-style: italic;
     color: red;
 }
+
+.text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.primary-btn {
+    color: var(--main-light-font-color);
+    background-color: var(--main-bg-color);
+}
+
+.primary-text-color {
+    color: var(--main-bg-font-color);
+}
