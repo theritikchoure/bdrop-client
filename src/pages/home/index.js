@@ -1,8 +1,12 @@
 import logo from '../../assets/images/bdrop-logo.png';
 import '../../assets/styles/home.css';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import CookiesConsent from '../../components/cookiesPopup';
 
-const Home = () => {
+const Home = (props) => {
+
+  let auth = props?.auth?.isAuthenticated;
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -13,6 +17,7 @@ const Home = () => {
      alert("not supported")
     }
   }
+
   return (
     <div className="w-full h-screen" style={{ backgroundColor: 'var(--main-bg-color)' }}>
       <div className="w-full h-screen flex flex-col items-center justify-between py-8">
@@ -29,13 +34,18 @@ const Home = () => {
             Take Action, Make A Blood Donation
           </h1>
           <div className="flex flex-col items-center space-y-4 mt-24">
-            {/* <Link to='/join' className="rounded-lg text-sm join-button">Join - BDROP</Link> */}
-            <button className="rounded-lg text-sm join-button" onClick={getLocation}>Join - BDROP</button>
+            <Link to={auth ? '/dashboard' : '/join'} className="rounded-lg text-sm join-button">{auth ? 'Explore' : 'Join - BDROP'}</Link>
+            {/* <button className="rounded-lg text-sm join-button" onClick={getLocation}>Join - BDROP</button> */}
           </div>
         </div>
       </div>
+      <CookiesConsent />
     </div>
   )
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Home);
