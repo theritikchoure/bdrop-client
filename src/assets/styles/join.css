@@ -24,7 +24,7 @@
     margin-top: -371px;
 }
 
-.tab {
+.user-type-tab {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
@@ -32,7 +32,7 @@
     margin-bottom: 15px;
 }
 
-.tab button {
+.user-type-tab button {
     background-color: inherit;
     float: left;
     border: none;
@@ -44,7 +44,7 @@
     width: 50%;
 }
 
-.tab button:hover {
+.user-type-tab button:hover {
     background-color: #ddd;
 }
 
@@ -96,7 +96,6 @@ input#login_mobile {
     background-color: var(--main-bg-color);
     padding: 5px;
     color: var(--main-light-font-color);
-    margin-top: 25px;
     border-radius: 5px;
 }
 
