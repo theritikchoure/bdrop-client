@@ -1,7 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/header';
+import { isEmpty } from '../../helper/common';
+import { accountValidate } from '../../validations/account.validations';
 
 const Account = () => {
+    const [initialValue, setInitialValue] = useState({
+        name: null,
+        email: null,
+        mobile: null,
+        gender: null,
+        address: null,
+        state: null,
+        city: null,
+        zip_code: null,
+        birth_date: null,
+        occupation: null,
+        weight: null,
+        have_you_donated: null,
+        last_donation: null,
+    });
+    const [error, setError] = useState({});
+
+    const onChangeFormData = (key, value) => {
+        if (!key) return;
+
+        console.log(key, value)
+
+        setInitialValue((prev) => {
+            return {
+                ...prev,
+                [key]: value,
+            };
+        });
+    };
+
+    const checkValidation = (payload) => {
+        let error = accountValidate(payload)
+        if (!isEmpty(error)) {
+            console.log(error);
+            setError(error);
+            return true;
+        }
+
+        setError({});
+        return false;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        checkValidation(initialValue);
+    }
+
+
     return (
         <>
             <Header />
@@ -11,75 +62,133 @@ const Account = () => {
                     <p className="text-center text-gray-600 text-sm mt-2">Here are some of the frequently asked questions</p>
                 </div>
 
-                <div className='bg-white rounded-lg shadow-xl'>
+                <div className='mb-12 bg-white rounded-lg shadow-xl'>
                     {/* <!-- component -->
                     <!-- This is an example component --> */}
-                    <div className="max-w-2xl mx-auto bg-white p-6">
+                    <div className="mb-10 max-w-2xl mx-auto bg-white p-6">
 
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className="grid gap-6 mb-6 lg:grid-cols-2">
                                 <div>
-                                    <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Name</label>
-                                    <input type="text" id="first_name" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="John" required />
+                                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Name</label>
+                                    <input className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        type="text" id="name" value={initialValue.name === null ? '' : initialValue?.name}
+                                        onChange={(e) => onChangeFormData('name', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.name && <span className='validation_message'>{error?.name}</span>}
                                 </div>
                                 <div className="mb-6">
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Email address</label>
-                                    <input type="email" id="email" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="john.doe@company.com" required />
+                                    <input className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        type="text" id="email" value={initialValue.email === null ? '' : initialValue?.email}
+                                        onChange={(e) => onChangeFormData('email', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.email && <span className='validation_message'>{error?.email}</span>}
                                 </div>
                                 <div>
-                                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Phone number</label>
-                                    <input type="tel" id="phone" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
+                                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Mobile number</label>
+                                    <input className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        type="text" id="phone" value={initialValue.mobile === null ? '' : initialValue?.mobile}
+                                        onChange={(e) => onChangeFormData('mobile', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.mobile && <span className='validation_message'>{error?.mobile}</span>}
                                 </div>
-                                <div className="mb-1">
-                                    <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Gender</label>
-                                </div>
-                                <div className="flex items-start mb-6">
-                                    <div className="flex items-center h-5">
-                                        <input id="gender" name='gender' type="radio" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
+                                <div className='mb-6'>
+                                    <div className="mb-1">
+                                        <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Gender</label>
                                     </div>
-                                    <label htmlFor="gender" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Female</label>
-                                    &nbsp; &nbsp;
-                                    <div className="flex items-center h-5">
-                                        <input id="gender" name='gender' type="radio" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
+                                    <div className="flex items-start mb-2">
+                                        <div className="flex items-center h-5">
+                                            <input id="gender" name='gender' type="radio" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"/>
+                                        </div>
+                                        <label htmlFor="gender" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Female</label>
+                                        &nbsp; &nbsp;
+                                        <div className="flex items-center h-5">
+                                            <input id="gender" name='gender' type="radio" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"/>
+                                        </div>
+                                        <label htmlFor="gender" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Male</label>
                                     </div>
-                                    <label htmlFor="gender" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Male</label>
+                                    {error?.gender && <span className='validation_message'>{error?.gender}</span>}
                                 </div>
                                 <div>
-                                    <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Last name</label>
-                                    <input type="text" id="last_name" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="Doe" required />
+                                    <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Address</label>
+                                    <input type="text" id="address" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        value={initialValue.address === null ? '' : initialValue?.address} onChange={(e) => onChangeFormData('address', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.address && <span className='validation_message'>{error?.address}</span>}
                                 </div>
                                 <div>
-                                    <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Company</label>
-                                    <input type="text" id="company" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="Flowbite" required />
+                                    <label htmlFor="state" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">State</label>
+                                    <input type="text" id="state" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        value={initialValue.state === null ? '' : initialValue?.state} onChange={(e) => onChangeFormData('state', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.state && <span className='validation_message'>{error?.state}</span>}
                                 </div>
 
                                 <div>
-                                    <label htmlFor="website" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Website URL</label>
-                                    <input type="url" id="website" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="flowbite.com" required />
+                                    <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">City</label>
+                                    <input type="text" id="city" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        value={initialValue.city === null ? '' : initialValue?.city} onChange={(e) => onChangeFormData('city', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.city && <span className='validation_message'>{error?.city}</span>}
                                 </div>
                                 <div>
-                                    <label htmlFor="visitors" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Unique visitors (per month)</label>
-                                    <input type="number" id="visitors" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="" required />
+                                    <label htmlFor="zip_code" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Zip code</label>
+                                    <input type="text" id="zip_code" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        value={initialValue.zip_code === null ? '' : initialValue?.zip_code} onChange={(e) => onChangeFormData('zip_code', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.zip_code && <span className='validation_message'>{error?.zip_code}</span>}
+                                </div>
+                                <div className="mb-6">
+                                    <label htmlFor="birth_date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Birthdate</label>
+                                    <input type="date" id="birth_date" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        value={initialValue.birth_date === null ? '' : initialValue?.birth_date} onChange={(e) => onChangeFormData('birth_date', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.birth_date && <span className='validation_message'>{error?.birth_date}</span>}
+                                </div>
+                                <div className="mb-6">
+                                    <label htmlFor="confirm_password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Occcupation</label>
+                                    <input type="text" id="confirm_password" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        value={initialValue.occupation === null ? '' : initialValue?.occupation} onChange={(e) => onChangeFormData('occupation', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.occupation && <span className='validation_message'>{error?.occupation}</span>}
+                                </div>
+                                <div className="mb-6">
+                                    <label htmlFor="confirm_password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Weight</label>
+                                    <input type="text" id="confirm_password" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        value={initialValue.weight === null ? '' : initialValue?.weight} onChange={(e) => onChangeFormData('weight', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.weight && <span className='validation_message'>{error?.weight}</span>}
+                                </div>
+                                <div className='mb-6'>
+                                    <div className="mb-1">
+                                        <label htmlFor="have_you_donated" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Have you donated blood previously?</label>
+                                    </div>
+                                    <div className="flex items-start mb-2">
+                                        <div className="flex items-center h-5">
+                                            <input id="have_you_donated" name='have_you_donated' type="radio" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"/>
+                                        </div>
+                                        <label htmlFor="have_you_donated" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Yes</label>
+                                        &nbsp; &nbsp;
+                                        <div className="flex items-center h-5">
+                                            <input id="have_you_donated" name='have_you_donated' type="radio" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"/>
+                                        </div>
+                                        <label htmlFor="have_you_donated" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">No</label>
+                                    </div>
+                                    {error?.have_you_donated && <span className='validation_message'>{error?.have_you_donated}</span>}
+                                </div>
+
+                                <div className="mb-6">
+                                    <label htmlFor="last_donation" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">What was the last time when you donated blood?</label>
+                                    <input type="month" id="last_donation" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-black"
+                                        value={initialValue.last_donation === null ? '' : initialValue?.last_donation} onChange={(e) => onChangeFormData('last_donation', e.target.value === '' ? null : e.target.value)}
+                                    />
+                                    {error?.last_donation && <span className='validation_message'>{error?.last_donation}</span>}
                                 </div>
                             </div>
 
-                            <div className="mb-6">
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Password</label>
-                                <input type="password" id="password" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="•••••••••" required />
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="confirm_password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black-300">Confirm password</label>
-                                <input type="password" id="confirm_password" className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="•••••••••" required />
-                            </div>
-
-                            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                            <button type="submit" className="primary-btn hover-primary-btn text-white font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
                         </form>
-
-                        <p className="mt-5">These input field components is part of a larger, open-source library of Tailwind CSS components. Learn
-                            more by going to the official <a className="text-blue-600 hover:underline"
-                                href="https://flowbite.com/docs/getting-started/introduction/" target="_blank">Flowbite
-                                Documentation</a>.
-                        </p>
                     </div>
                 </div>
             </div>

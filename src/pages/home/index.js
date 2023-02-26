@@ -2,21 +2,10 @@ import logo from '../../assets/images/bdrop-logo.png';
 import '../../assets/styles/home.css';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import CookiesConsent from '../../components/cookiesPopup';
 
 const Home = (props) => {
 
   let auth = props?.auth?.isAuthenticated;
-
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        alert(position.coords.latitude);
-      });
-    } else {
-     alert("not supported")
-    }
-  }
 
   return (
     <div className="w-full h-screen" style={{ backgroundColor: 'var(--main-bg-color)' }}>
@@ -39,7 +28,6 @@ const Home = (props) => {
           </div>
         </div>
       </div>
-      <CookiesConsent />
     </div>
   )
 }

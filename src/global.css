@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .left-33 {
+        left: 33.4%;
+    }
+}
+
 :root {
     --main-bg-color: #FF2156;
     --second-bg-color: #FFF;
@@ -23,6 +29,12 @@
 .primary-btn {
     color: var(--main-light-font-color);
     background-color: var(--main-bg-color);
+}
+
+.hover-primary-btn:hover {
+    background-color: var(--main-light-font-color);
+    color: var(--main-bg-color);
+    border: 1px solid;
 }
 
 .primary-text-color {

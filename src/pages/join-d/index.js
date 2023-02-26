@@ -12,19 +12,17 @@ import { Link, useNavigate } from 'react-router-dom';
 const Index = (props) => {
   const navigate = useNavigate();
   const [buttonText, setButtonText] = useState('Request OTP');
-  const [otpDisabled, setOtpDisabled] = useState(true);
   const [formType, setFormType] = useState('generateotp');
   const [initialValue, setInitialValue] = useState({
     user_type: 'patient',
     mobile: '',
     otp: '',
+    remember: true,
   });
   const [error, setError] = useState({})
 
   const onChangeFormData = (key, value) => {
     if (!key) return;
-
-    console.log(key, value)
 
     setInitialValue((prev) => {
       return {
@@ -60,7 +58,6 @@ const Index = (props) => {
       setError({});
 
       let res = await props.generateOTP({ user_type: initialValue.user_type, mobile: initialValue.mobile });
-      setOtpDisabled(false);
       setInitialValue({
         user_type: initialValue.user_type,
         mobile: initialValue.mobile,
@@ -89,7 +86,6 @@ const Index = (props) => {
       setError({});
 
       let res = await props.verifyOTP({ user_type: initialValue.user_type, mobile: initialValue.mobile, otp: initialValue.otp });
-      setOtpDisabled(false);
       setInitialValue({
         user_type: 'patient',
         mobile: '',
@@ -111,14 +107,6 @@ const Index = (props) => {
     // < !--component -- >
     <div className="bg-white">
       <div className="flex justify-center h-screen">
-        <div className="hidden bg-cover lg:block lg:w-2/3" style={{ backgroundColor: 'var(--main-bg-color)' }}>
-          <div className="flex items-center h-full px-20 flex-1 flex-col justify-center">
-            <div className="bg-white h-28 w-28 rounded-full px-4 py-2 mt-12 flex items-center justify-center space-x-2 lg:space-x-4">
-              <img src={MobileSecurityIcon} alt="logo" />
-            </div>
-          </div>
-        </div>
-
         <div className="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
           <div className="flex-1">
             <div className="text-center">
@@ -162,7 +150,13 @@ const Index = (props) => {
 
                 <div className="flex items-start mt-6">
                   <div className="flex items-center h-5">
-                    <input id="remember" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
+                    <input id="remember" type="checkbox" value={initialValue?.remember}
+                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 
+                      focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 
+                      dark:ring-offset-gray-800" checked={initialValue?.remember}
+                      onChange={(e) => onChangeFormData('remember', e.target.checked)}
+                      required={formType === 'generateotp' ? false : true}
+                    />
                   </div>
                   <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">
                     I agree with the &nbsp;
@@ -179,6 +173,14 @@ const Index = (props) => {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden bg-cover lg:block lg:w-2/3" style={{ backgroundColor: 'var(--main-bg-color)' }}>
+          <div className="flex items-center h-full px-20 flex-1 flex-col justify-center">
+            <div className="bg-white h-28 w-28 rounded-full px-4 py-2 mt-12 flex items-center justify-center space-x-2 lg:space-x-4">
+              <img src={MobileSecurityIcon} alt="logo" />
             </div>
           </div>
         </div>

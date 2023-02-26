@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const CookiesConsent = () => {
     const [open, setOpen] = useState(true);
+
+    useEffect(() => {
+        let consent = JSON.parse(localStorage.getItem('cookie-consent'));
+        if(consent) setOpen(false); 
+    }, [])
+    
+
+    const acceptAll = () => {
+        localStorage.setItem('cookie-consent', JSON.stringify(true));
+        setOpen(false);
+    }
 
     return (
         open && <section className="fixed max-w-md p-4 mx-auto bg-white border border-gray-200 dark:bg-gray-800 left-12 bottom-16 dark:border-gray-700 rounded-2xl">
@@ -20,7 +31,7 @@ const CookiesConsent = () => {
 
             <div className="grid grid-cols-2 gap-4 mt-4 shrink-0">
                 <button className=" text-xs bg-gray-900 font-medium rounded-lg hover:bg-gray-700 text-white px-4 py-2.5 duration-300 transition-colors focus:outline-none"
-                    onClick={() => setOpen(false)}
+                    onClick={() => acceptAll()}
                 >
                     Accept all
                 </button>
