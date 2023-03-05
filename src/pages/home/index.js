@@ -23,7 +23,7 @@ const Home = (props) => {
             Take Action, Make A Blood Donation
           </h1>
           <div className="flex flex-col items-center space-y-4 mt-24">
-            <Link to={auth ? '/dashboard' : '/join'} className="rounded-lg text-sm join-button">{auth ? 'Explore' : 'Join - BDROP'}</Link>
+            <Link to={auth ? '/explore' : '/join'} className="rounded-lg text-sm join-button">{auth ? 'Explore' : 'Join - BDROP'}</Link>
             {/* <button className="rounded-lg text-sm join-button" onClick={getLocation}>Join - BDROP</button> */}
           </div>
         </div>

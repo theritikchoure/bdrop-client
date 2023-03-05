@@ -14,7 +14,7 @@ const Index = (props) => {
   const [buttonText, setButtonText] = useState('Request OTP');
   const [formType, setFormType] = useState('generateotp');
   const [initialValue, setInitialValue] = useState({
-    user_type: 'patient',
+    user_type: '',
     mobile: '',
     otp: '',
     remember: true,
@@ -62,6 +62,7 @@ const Index = (props) => {
         user_type: initialValue.user_type,
         mobile: initialValue.mobile,
         otp: '',
+        remember: initialValue.remember
       });
       setFormType('verifyotp');
       setButtonText('Submit OTP');
@@ -76,7 +77,12 @@ const Index = (props) => {
   const verifyOtp = async (e) => {
     try {
       console.log('verify otp')
-      let error = loginValidate({ user_type: initialValue.user_type, mobile: initialValue.mobile, otp: initialValue.otp }, true);
+      let error = loginValidate({ 
+        user_type: initialValue.user_type, 
+        mobile: initialValue.mobile, 
+        otp: initialValue.otp,
+        remember: initialValue.remember
+      }, formType);
       console.log(error);
       if (!isEmpty(error)) {
         setError(error);
@@ -94,7 +100,7 @@ const Index = (props) => {
       setFormType('generateotp');
       setButtonText('Request OTP')
       successToast(res.message);
-      navigate('/dashboard');
+      navigate('/explore');
       return true;
     } catch (error) {
       console.log(error);
@@ -116,12 +122,15 @@ const Index = (props) => {
             </div>
 
             <div className="mt-8">
-              <div className="user-type-tab">
+              <div className="user-type-tab-div">
+                <div className="user-type-tab">
                 <button className={initialValue.user_type === 'patient' ? 'tablinks active' : 'tablinks'}
                   onClick={() => onChangeFormData('user_type', 'patient')}
                 >Patient</button>
                 <button className={initialValue.user_type === 'donor' ? 'tablinks active' : 'tablinks'}
                   onClick={() => onChangeFormData('user_type', 'donor')}>Donor</button>
+                </div>
+                {error?.user_type && <span className='validation_message'>{error?.user_type}</span>}
               </div>
               <form onSubmit={handleSubmit}>
                 <div>
@@ -155,7 +164,6 @@ const Index = (props) => {
                       focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 
                       dark:ring-offset-gray-800" checked={initialValue?.remember}
                       onChange={(e) => onChangeFormData('remember', e.target.checked)}
-                      required={formType === 'generateotp' ? false : true}
                     />
                   </div>
                   <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">
@@ -165,6 +173,7 @@ const Index = (props) => {
                     </Link>.
                   </label>
                 </div>
+                {error?.remember && <span className='validation_message'>{error?.remember}</span>}
 
                 <div className="mt-6">
                   <button id='login_submit_button' type='submit'

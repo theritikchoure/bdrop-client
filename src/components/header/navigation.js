@@ -34,7 +34,7 @@ const MobileHeader = () => {
                         </svg>
                         <span className="tab tab-kategori block text-xs">Category</span>
                     </Link>
-                    <Link to="/dashboard" className="w-full focus:text-red-700 hover:text-red-700 justify-center inline-block text-center pt-2 pb-1">
+                    <Link to="/explore" className="w-full focus:text-red-700 hover:text-red-700 justify-center inline-block text-center pt-2 pb-1">
                         <svg width="25" height="25" viewBox="0 0 42 42" className="inline-block mb-1">
                             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                                 <path d="M20.5890101,0.254646884 C12.8696785,5.50211755 8.0025785,14.258415 14.1941217,18.8708225 C23.16683,25.5550669 13.3362326,40.2698884 33.1021758,38.4149164 C29.6814884,40.8311956 25.5065164,42.2507054 21,42.2507054 C9.40202025,42.2507054 0,32.8486852 0,21.2507054 C0,9.79003409 9.18071714,0.473634138 20.5890101,0.254646884 Z" fill="currentColor" opacity="0.1"></path>
@@ -45,7 +45,7 @@ const MobileHeader = () => {
                         <span className="tab tab-explore block text-xs">Explore</span>
                     </Link>
                     <Link to="/" className="w-full focus:text-red-700 hover:text-red-700 justify-center inline-block text-center pt-2 pb-1">
-                        <svg width="25" height="25" viewBox="0 0 42 42" className="inline-block mb-1">
+                        {/* <svg width="25" height="25" viewBox="0 0 42 42" className="inline-block mb-1">
                             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                                 <path d="M14.7118754,20.0876892 L8.03575361,20.0876892 C5.82661462,20.0876892 4.03575361,18.2968282 4.03575361,16.0876892 L4.03575361,12.031922 C4.03575361,8.1480343 6.79157254,4.90780265 10.4544842,4.15995321 C8.87553278,8.5612583 8.1226025,14.3600511 10.9452499,15.5413938 C13.710306,16.6986332 14.5947501,18.3118357 14.7118754,20.0876892 Z M14.2420017,23.8186831 C13.515543,27.1052019 12.7414284,30.2811559 18.0438552,31.7330419 L18.0438552,33.4450645 C18.0438552,35.6542035 16.2529942,37.4450645 14.0438552,37.4450645 L9.90612103,37.4450645 C6.14196811,37.4450645 3.09051926,34.3936157 3.09051926,30.6294627 L3.09051926,27.813861 C3.09051926,25.604722 4.88138026,23.813861 7.09051926,23.813861 L14.0438552,23.813861 C14.1102948,23.813861 14.1763561,23.8154808 14.2420017,23.8186831 Z M20.7553776,32.160536 C23.9336213,32.1190063 23.9061943,29.4103976 33.8698747,31.1666916 C34.7935223,31.3295026 35.9925894,31.0627305 37.3154077,30.4407183 C37.09778,34.8980343 33.4149547,38.4450645 28.9036761,38.4450645 C24.9909035,38.4450645 21.701346,35.7767637 20.7553776,32.160536 Z" fill="currentColor" opacity="0.1"></path>
                                 <g transform="translate(2.000000, 3.000000)">
@@ -56,10 +56,12 @@ const MobileHeader = () => {
                                     <circle stroke="currentColor" strokeWidth="2" cx="27.5" cy="27.5" r="7.5"></circle>
                                 </g>
                             </g>
-                        </svg>
+                        </svg> */}
+                        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" className="inline-block mb-1" stroke="#ff0000">
+                            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.02 2.90991C8.70997 2.90991 6.01997 5.59991 6.01997 8.90991V11.7999C6.01997 12.4099 5.75997 13.3399 5.44997 13.8599L4.29997 15.7699C3.58997 16.9499 4.07997 18.2599 5.37997 18.6999C9.68997 20.1399 14.34 20.1399 18.65 18.6999C19.86 18.2999 20.39 16.8699 19.73 15.7699L18.58 13.8599C18.28 13.3399 18.02 12.4099 18.02 11.7999V8.90991C18.02 5.60991 15.32 2.90991 12.02 2.90991Z" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round"></path> <path d="M13.87 3.19994C13.56 3.10994 13.24 3.03994 12.91 2.99994C11.95 2.87994 11.03 2.94994 10.17 3.19994C10.46 2.45994 11.18 1.93994 12.02 1.93994C12.86 1.93994 13.58 2.45994 13.87 3.19994Z" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"></path> <path d="M15.02 19.0601C15.02 20.7101 13.67 22.0601 12.02 22.0601C11.2 22.0601 10.44 21.7201 9.90002 21.1801C9.36002 20.6401 9.02002 19.8801 9.02002 19.0601" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10"></path> </g></svg>
                         <span className="tab tab-whishlist block text-xs">Whishlist</span>
                     </Link>
-                    <Link to='/account' className="w-full focus:text-red-700 hover:text-red-700 justify-center inline-block text-center pt-2 pb-1">
+                    <Link to='/setting' className="w-full focus:text-red-700 hover:text-red-700 justify-center inline-block text-center pt-2 pb-1">
                         <svg width="25" height="25" viewBox="0 0 42 42" className="inline-block mb-1">
                             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                                 <path d="M14.7118754,20.0876892 L8.03575361,20.0876892 C5.82661462,20.0876892 4.03575361,18.2968282 4.03575361,16.0876892 L4.03575361,12.031922 C4.03575361,8.1480343 6.79157254,4.90780265 10.4544842,4.15995321 C8.87553278,8.5612583 8.1226025,14.3600511 10.9452499,15.5413938 C13.710306,16.6986332 14.5947501,18.3118357 14.7118754,20.0876892 Z M14.2420017,23.8186831 C13.515543,27.1052019 12.7414284,30.2811559 18.0438552,31.7330419 L18.0438552,33.4450645 C18.0438552,35.6542035 16.2529942,37.4450645 14.0438552,37.4450645 L9.90612103,37.4450645 C6.14196811,37.4450645 3.09051926,34.3936157 3.09051926,30.6294627 L3.09051926,27.813861 C3.09051926,25.604722 4.88138026,23.813861 7.09051926,23.813861 L14.0438552,23.813861 C14.1102948,23.813861 14.1763561,23.8154808 14.2420017,23.8186831 Z M20.7553776,32.160536 C23.9336213,32.1190063 23.9061943,29.4103976 33.8698747,31.1666916 C34.7935223,31.3295026 35.9925894,31.0627305 37.3154077,30.4407183 C37.09778,34.8980343 33.4149547,38.4450645 28.9036761,38.4450645 C24.9909035,38.4450645 21.701346,35.7767637 20.7553776,32.160536 Z" fill="currentColor" opacity="0.1"></path>
@@ -72,7 +74,7 @@ const MobileHeader = () => {
                                 </g>
                             </g>
                         </svg>
-                        <span className="tab tab-account block text-xs">Account</span>
+                        <span className="tab tab-account block text-xs">Setting</span>
                     </Link>
                 </div>
             </section>

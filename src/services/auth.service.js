@@ -45,6 +45,14 @@ export const verifyOTP = (payload) => async (dispatch) => {
 };
 
 /**
+ * @desc Verify OTP for Login
+ * @param {*} obj Data Obj
+ */
+export const getAuthUserDetails = (payload) => async (dispatch) => {
+  
+}
+
+/**
  * @desc set login token and set user
  */
 export const setLoginToken = (token) => (dispatch) => {

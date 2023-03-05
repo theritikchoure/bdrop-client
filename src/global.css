@@ -6,6 +6,10 @@
     .left-33 {
         left: 33.4%;
     }
+
+    .w-webkit {
+        width: -webkit-fill-available;
+    }
 }
 
 :root {

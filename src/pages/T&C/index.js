@@ -3,16 +3,16 @@ import Header from '../../components/header';
 
 const TAndC = () => {
     return (
-        <div class="p-2">
-            <div class="bg-white p-4 py-8 mt-12">
-                <h4 class="text-3xl font-bold text-black-800 text-center">Terms &amp; Conditions</h4>
-                <p class="text-center text-gray-600 text-sm mt-2">Here are some of the frequently asked questions</p>
+        <div className="p-2">
+            <div className="bg-white p-4 py-8 mt-12">
+                <h4 className="text-3xl font-bold text-black-800 text-center">Terms &amp; Conditions</h4>
+                <p className="text-center text-gray-600 text-sm mt-2">Here are some of the frequently asked questions</p>
             </div>
 
             <div className='bg-white rounded-lg shadow-xl'>
                 {/* <!-- component -->
                     <!-- This is an example component --> */}
-                <div class="max-w-2xl mx-auto bg-white p-5 text-gray-600 mb-10">
+                <div className="max-w-2xl mx-auto bg-white p-5 text-gray-600 mb-10">
                     <ul>
                         <li>1. All users of this website must be aged 18 or over.</li>
                         <br />
