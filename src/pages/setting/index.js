@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../../services/auth.service';
 
 const Setting = (props) => {
 
@@ -140,7 +141,7 @@ const Setting = (props) => {
                                 Login acitivity
                             </Link>
                         </div>}
-                        <button
+                        <button onClick={() => props.logout()}
                             className="primary-text-color text-left w-full cursor-pointer rounded-lg bg-primary-100 p-4 text-primary-600 hover:bg-neutral-100">
                             Log out
                         </button>
@@ -155,4 +156,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Setting);
+export default connect(mapStateToProps, { logout })(Setting);
