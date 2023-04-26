@@ -5,6 +5,7 @@ import { clearResponseMessage } from './../redux/actions/messageActions';
 import { postRequestMethod } from '../global/api.manager';
 import { clearToken, saveToken } from '../helper/authTokenHelpers';
 import { deleteAllLocalData, saveUserDetails } from '../helper/localStorageHelpers';
+import { decrypt } from '../helper/common';
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL+'/auth';
 /**
@@ -58,8 +59,12 @@ export const getAuthUserDetails = (payload) => async (dispatch) => {
 export const setLoginToken = (token) => (dispatch) => {
   // save auth deteils and set token in header for request
   saveToken(token);
+
+  // Decrypt token
+  const decryptedToken = decrypt(token);
+
   // Decode token to get user data
-  const decoded = jwt_decode(token);
+  const decoded = jwt_decode(decryptedToken);
   // Set current user in localstorage and redux
   saveUserDetails(decoded);
   dispatch(setCurrentUser(decoded))
