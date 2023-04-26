@@ -100,7 +100,7 @@ const Index = (props) => {
       setFormType('generateotp');
       setButtonText('Request OTP')
       successToast(res.message);
-      navigate('/explore');
+      navigate('/');
       return true;
     } catch (error) {
       console.log(error);

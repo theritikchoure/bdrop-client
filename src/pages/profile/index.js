@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { isEmpty } from '../../helper/common';
+import { BloodGroups, isEmpty } from '../../helper/common';
 import { accountValidate } from '../../validations/account.validations';
 import { connect } from 'react-redux';
-const bloodgroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
+const bloodgroups = BloodGroups;
 
 const Account = (props) => {
     const [initialValue, setInitialValue] = useState({

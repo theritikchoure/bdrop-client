@@ -18,14 +18,13 @@ function App(props) {
       <ToastContainer position="bottom-center" />
       <Routes>
 
-        <Route exact path="/" element={<Home />} />
-
         {auth?.user?.user && <>
           <Route exact path="/*" element={<Layout />} />
           <Route path="/join" element={<Navigate to="/explore" replace />} />
         </>}
 
         {!auth?.user?.user && <>
+          <Route exact path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/join" replace />} />
           <Route path="/join" element={<Join />} />
         </>}
