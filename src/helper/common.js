@@ -1,6 +1,9 @@
 import moment from 'moment';
 import _ from 'lodash';
 import { dismissToast, infoToast, warningToast } from '../components/toasterNotifications';
+const ENCRYPTION_KEY = process.env.REACT_APP_ENCRYPTION_KEY;
+
+export const BloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
 
 /**
  * @desc Check if given value is string
@@ -457,3 +460,30 @@ export const durationInAsSeconds = (start, end) => {
   const duration = moment.duration(end.diff(start));
   return duration.asSeconds();
 };
+
+export const encrypt = (plainText = null) => {
+  if (isEmpty(plainText)) return console.log('plain text should not be empty');
+  if (isEmpty(ENCRYPTION_KEY)) return console.log('encryption key should not be empty');
+
+  let encryptedText = '';
+  for (let i = 0; i < plainText.length; i++) {
+      const plainCharCode = plainText.charCodeAt(i);
+      const keyCharCode = ENCRYPTION_KEY.charCodeAt(i % ENCRYPTION_KEY.length);
+      const encryptedCharCode = plainCharCode ^ keyCharCode; // XOR operation
+      encryptedText += String.fromCharCode(encryptedCharCode);
+  }
+  return encryptedText;
+}
+
+export const decrypt = (encryptedText = null) => {
+  if (isEmpty(encryptedText)) return console.log('encrypted text should not be empty');
+  if (isEmpty(ENCRYPTION_KEY)) return console.log('encryption key should not be empty');
+  let plainText = '';
+  for (let i = 0; i < encryptedText.length; i++) {
+      const encryptedCharCode = encryptedText.charCodeAt(i);
+      const keyCharCode = ENCRYPTION_KEY.charCodeAt(i % ENCRYPTION_KEY.length);
+      const plainCharCode = encryptedCharCode ^ keyCharCode; // XOR operation
+      plainText += String.fromCharCode(plainCharCode);
+  }
+  return plainText;
+}
